@@ -1,0 +1,74 @@
+import Timesheet from "../Models/Timesheet.model.js";
+import Project from "../Models/Project.model.js";
+import { v4 as uuidv4 } from "uuid";
+
+export const createTimesheet = async (req, res) => {
+  try {
+    const { projectId, date, hours } = req.body;
+
+    // check project status
+    const project = await Project.findOne({ projectId });
+    if (!project || project.status === "Completed") {
+      return res
+        .status(400)
+        .json({ message: "Project closed, cannot add timesheet" });
+    }
+
+    if (hours > 24)
+      return res
+        .status(400)
+        .json({ message: "Cannot log more than 24 hours/day" });
+
+    const ts = new Timesheet({
+      timesheetId: uuidv4(),
+      projectId,
+      Project_name: project.job_name,
+      Project_code: project.Pro_code.code,
+      employeeId: req.user.userId,
+      date,
+      hours,
+      status: "Submitted",
+      createdBy: req.user.userId,
+    });
+    await ts.save();
+    res.status(201).json(ts);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+export const updateTimesheet = async (req, res) => {
+  try {
+    const ts = await Timesheet.findOneAndUpdate(
+      { timesheetId: req.params.id, employeeId: req.user.userId },
+      { ...req.body, updatedBy: req.user.userId },
+      { new: true }
+    );
+    if (!ts) return res.status(404).json({ message: "Not found" });
+    res.json(ts);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+export const approveTimesheet = async (req, res) => {
+  try {
+    const ts = await Timesheet.findOneAndUpdate(
+      { timesheetId: req.params.id },
+      { status: req.body.status || "Approved", updatedBy: req.user.userId },
+      { new: true }
+    );
+    res.json(ts);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+export const getTimesheets = async (req, res) => {
+  try {
+    const list = await Timesheet.find();
+    res.json(list);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
