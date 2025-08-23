@@ -11,6 +11,7 @@ import timesheetRoutes from "./src/Routes/timesheet.route.js";
 import dashboardRoutes from "./src/Routes/dashboard.route.js";
 import reportRoutes from "./src/Routes/report.route.js";
 import cors from "cors";
+
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
 
@@ -23,14 +24,6 @@ app.use(
     credentials: true,
   })
 );
-//"http://localhost:5173" ||
-// app.use(
-//   cors({
-//     origin: "http://localhost:5173",
-//     methods: "GET,POST,PUT,DELETE",
-//     credentials: true,
-//   })
-// );
 
 app.use(express.json());
 connectDB();
