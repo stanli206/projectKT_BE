@@ -2,9 +2,7 @@ import Employee from "../Models/Employee.model.js";
 import User from "../Models/User.model.js";
 import { v4 as uuidv4 } from "uuid";
 
-/**
- * Create employee (Admin)
- */
+
 export const createEmployee = async (req, res) => {
   try {
     const data = req.body;

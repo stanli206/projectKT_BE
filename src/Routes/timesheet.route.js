@@ -6,17 +6,18 @@ import {
   updateTimesheet,
   approveTimesheet,
   getTimesheets,
+  deleteTimesheet,
 } from "../Controllers/timesheet.controller.js";
 
 const router = express.Router();
 
-router.post(
-  "/",
+router.post("/", authMiddleware, permit("Employee", "Admin"), createTimesheet);
+router.put(
+  "/:id",
   authMiddleware,
-  permit("Employee", "Principal", "Admin"),
-  createTimesheet
+  permit("Employee", "Admin", "Principal"),
+  updateTimesheet
 );
-router.put("/:id", authMiddleware, updateTimesheet);
 router.post(
   "/:id/approve",
   authMiddleware,
@@ -24,5 +25,6 @@ router.post(
   approveTimesheet
 );
 router.get("/", authMiddleware, getTimesheets);
+router.delete("/:id", authMiddleware, permit("Admin"), deleteTimesheet);
 
 export default router;

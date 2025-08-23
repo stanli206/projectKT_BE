@@ -3,9 +3,7 @@ import Customer from "../Models/Customer.model.js";
 import { makeProjectCode } from "../utils/projectCode.js";
 import { v4 as uuidv4 } from "uuid";
 
-/**
- * Create Project
- */
+
 export const createProject = async (req, res) => {
   try {
     const {
@@ -71,9 +69,7 @@ export const createProject = async (req, res) => {
   }
 };
 
-/**
- * Update Project
- */
+
 export const updateProject = async (req, res) => {
   try {
     const { id } = req.params;
@@ -138,9 +134,7 @@ export const updateProject = async (req, res) => {
   }
 };
 
-/**
- * List Projects
- */
+
 export const listProjects = async (req, res) => {
   try {
     const projects = await Project.find();
@@ -150,9 +144,7 @@ export const listProjects = async (req, res) => {
   }
 };
 
-/**
- * Delete Project
- */
+
 export const deleteProject = async (req, res) => {
   try {
     const { id } = req.params;

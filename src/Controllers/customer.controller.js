@@ -46,14 +46,6 @@ export const updateCustomer = async (req, res) => {
   }
 };
 
-// export const deleteCustomer = async (req, res) => {
-//   try {
-//     await Customer.findOneAndDelete({ Customer_id: req.params.id });
-//     res.json({ message: "Deleted" });
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// };
 export const deleteCustomer = async (req, res) => {
   try {
     const { id } = req.params;

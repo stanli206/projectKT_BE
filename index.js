@@ -11,7 +11,6 @@ import timesheetRoutes from "./src/Routes/timesheet.route.js";
 import dashboardRoutes from "./src/Routes/dashboard.route.js";
 import reportRoutes from "./src/Routes/report.route.js";
 import cors from "cors";
-
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
 
@@ -20,12 +19,11 @@ const app = express();
 app.use(
   cors({
     origin: "https://emptimesheetmanagement.netlify.app",
-
     method: "GET,POST,PUT,DELETE",
     credentials: true,
   })
 );
-////"http://localhost:5173",
+//"http://localhost:5173" ||
 // app.use(
 //   cors({
 //     origin: "http://localhost:5173",

@@ -3,9 +3,7 @@ import Notification from "../Models/Notification.model.js";
 import { v4 as uuidv4 } from "uuid";
 import bcrypt from "bcrypt";
 
-/**
- * List all users (Admin)
- */
+
 export const getAllUsers = async (req, res) => {
   try {
     const users = await User.find().select("-passwordHash -__v");
@@ -18,11 +16,6 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
-/**
- * Get user profile:
- * - if requester is Admin => can fetch any profile
- * - else can fetch only own profile
- */
 export const getUserProfile = async (req, res) => {
   try {
     const { id } = req.params;
@@ -45,12 +38,6 @@ export const getUserProfile = async (req, res) => {
   }
 };
 
-/**
- * Update user profile:
- * - password change supported if plainPassword provided
- * - only Admin can change role
- * - recordTracking appended
- */
 export const updateUserProfile = async (req, res) => {
   try {
     const { id } = req.params;
@@ -108,36 +95,7 @@ export const updateUserProfile = async (req, res) => {
   }
 };
 
-/**
- * Delete user (Admin)
- */
-// export const deleteUser = async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const deleted = await User.findOneAndDelete({ userId: id });
-//     if (!deleted) return res.status(404).json({ message: "User not found" });
 
-//     // notification
-//     const note = new Notification({
-//       notificationId: uuidv4(),
-//       to: process.env.ADMIN_EMAIL || "admin@example.com",
-//       subject: "User deleted",
-//       message: `User ${deleted.userName} (id: ${deleted.userId}) deleted by ${req.user.userName}`,
-//       module: "user",
-//       action: "delete",
-//       triggeredBy: req.user.userId,
-//     });
-//     await note.save();
-
-//     return res.json({ message: "User deleted" });
-//   } catch (err) {
-//     console.error("deleteUser error:", err);
-//     return res
-//       .status(500)
-//       .json({ message: "Server error", error: err.message });
-//   }
-// };
-// controllers/user.controller.js
 export const deleteUser = async (req, res) => {
   try {
     const { id } = req.params;

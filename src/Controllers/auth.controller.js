@@ -13,12 +13,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "7d";
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@example.com";
 
-/**
- * Admin creates a user tied to an employeeId.
- * - Checks user count limit (200)
- * - Hashes password
- * - Sends welcome email and creates Notification record
- */
+
 export const registerByAdmin = async (req, res) => {
   try {
     const {
@@ -141,9 +136,7 @@ export const registerByAdmin = async (req, res) => {
   }
 };
 
-/**
- * Login: username + password -> JWT
- */
+
 export const login = async (req, res) => {
   try {
     const { userName, password } = req.body;
