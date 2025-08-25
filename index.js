@@ -19,12 +19,11 @@ dotenv.config();
 const app = express();
 app.use(
   cors({
-    origin:
-      "http://localhost:5173" || "https://emptimesheetmanagement.netlify.app",
+    origin: "https://emptimesheetmanagement.netlify.app",
     method: "GET,POST,PUT,DELETE",
     credentials: true,
   })
-);
+); //"http://localhost:5173" ||
 
 app.use(express.json());
 
