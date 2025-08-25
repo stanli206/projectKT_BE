@@ -37,19 +37,7 @@ export const createTimesheet = async (req, res) => {
   }
 };
 
-// export const updateTimesheet = async (req, res) => {
-//   try {
-//     const ts = await Timesheet.findOneAndUpdate(
-//       { timesheetId: req.params.id, employeeId: req.user.userId },
-//       { ...req.body, updatedBy: req.user.userId },
-//       { new: true }
-//     );
-//     if (!ts) return res.status(404).json({ message: "Not found" });
-//     res.json(ts);
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// };
+
 export const updateTimesheet = async (req, res) => {
   try {
     const { id } = req.params;

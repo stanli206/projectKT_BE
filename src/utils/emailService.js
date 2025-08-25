@@ -47,35 +47,4 @@ export const sendEmail = async ({ to, subject, text, html }) => {
   }
 };
 
-// export const sendEmail = async ({ to, subject, text, html }) => {
-//   try {
-//     const info = await transporter.sendMail({
-//       from: process.env.SMTP_USER,
-//       to,
-//       subject,
-//       text,
-//       html,
-//     });
 
-//     // store notification
-//     try {
-//       const note = new Notification({
-//         notificationId: uuidv4(),
-//         to,
-//         subject,
-//         message: text || html || "",
-//         module: "email",
-//         action: "create",
-//         triggeredBy: null,
-//       });
-//       await note.save();
-//     } catch (e) {
-//       console.warn("Failed to save notification:", e.message);
-//     }
-
-//     return info;
-//   } catch (err) {
-//     console.error("sendEmail error:", err);
-//     throw err;
-//   }
-// };

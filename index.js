@@ -19,14 +19,15 @@ dotenv.config();
 const app = express();
 app.use(
   cors({
-    origin: "https://emptimesheetmanagement.netlify.app",
+    origin:
+      "http://localhost:5173" || "https://emptimesheetmanagement.netlify.app",
     method: "GET,POST,PUT,DELETE",
     credentials: true,
   })
 );
 
 app.use(express.json());
-connectDB();
+
 const seedAdmin = async () => {
   const exists = await User.findOne({ role: "Admin" });
   if (!exists) {
@@ -41,9 +42,7 @@ const seedAdmin = async () => {
   }
 };
 seedAdmin();
-// app.use("/api/projects", projectRoutes);
-// app.use("/api/auth", authRoutes);
-// app.use("/api/users", userRoutes);
+connectDB();
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/employees", employeeRoutes);

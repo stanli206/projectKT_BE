@@ -13,7 +13,6 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "7d";
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@example.com";
 
-
 export const registerByAdmin = async (req, res) => {
   try {
     const {
@@ -135,7 +134,6 @@ export const registerByAdmin = async (req, res) => {
       .json({ message: "Server error", error: err.message });
   }
 };
-
 
 export const login = async (req, res) => {
   try {
