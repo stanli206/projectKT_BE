@@ -6,12 +6,19 @@ import {
   getAllEmployees,
   getEmployeeById,
   updateEmployee,
-  deleteEmployee
+  deleteEmployee,
 } from "../Controllers/employee.controller.js";
+import { validateEmployeeBody } from "../Controllers/employee.controller.js";
 
 const router = express.Router();
 
-router.post("/", authMiddleware, permit("Admin"), createEmployee);
+router.post(
+  "/",
+  authMiddleware,
+  permit("Admin"),
+  validateEmployeeBody,
+  createEmployee
+);
 router.get("/", authMiddleware, permit("Admin", "Principal"), getAllEmployees);
 router.get("/:id", authMiddleware, getEmployeeById);
 router.put("/:id", authMiddleware, updateEmployee);
